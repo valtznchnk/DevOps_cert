@@ -1,0 +1,52 @@
+#file: noinspection YAMLSchemaValidation
+---
+- name: Configure Deploy
+  hosts: deploy
+  become: yes
+
+  tasks:
+    - name: Ensure maven package is present
+      apt:
+        name: maven
+        state: present
+
+    - name: Ensure git package is present
+      apt:
+        name: git
+        state: present
+
+    - name: Create workdir
+      command: "mkdir /tmp/app"
+
+    - name: Example clone repository
+      git:
+        repo: https://github.com/vinayakrj/java-war-project.git
+        dest: /tmp/app
+
+    - name: Move workdir
+      become: yes
+      shell: "cd /tmp/app && mvn package"
+
+    - name: Copy war-file in master
+      fetch:
+        src: /tmp/app/target/my-app.war
+        dest: /tmp
+
+- name: Configure Prod
+  hosts: prod
+  become: yes
+
+  tasks:
+    - name: Apt update
+      apt:
+        update_cache: yes
+
+    - name: Ensure maven package is present
+      apt:
+        name: maven
+        state: present
+
+    - name: Copy my-app.war
+      copy:
+        src: /tmp/my-app.war
+        dest: /usr/local/tomcat/webapps/
