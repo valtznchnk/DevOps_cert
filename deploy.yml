@@ -29,11 +29,11 @@
 
     - name: Move workdir
       become: yes
-      shell: "cd /home/ubuntu/my_app/java-war-project && mvn package"
+      shell: "cd /home/ubuntu/my_app && mvn package"
 
     - name: Copy war-file in master
       fetch:
-        src: /home/ubuntu/my_app/java-war-project/target/my-app.war
+        src: /home/ubuntu/my_app/target/my-app.war
         dest: /tmp/my-app.war
 
 - name: Configure Prod
