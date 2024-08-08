@@ -20,7 +20,7 @@
         state: present
 
     - name: Create workdir
-      command: "mkdir /tmp/app"
+      command: "mkdir /tmp/my_app"
 
     - name: Example clone repository
       git:
@@ -29,12 +29,12 @@
 
     - name: Move workdir
       become: yes
-      shell: "cd /tmp/app && mvn package"
+      shell: "cd /tmp/my_app && mvn package"
 
     - name: Copy war-file in master
       fetch:
-        src: /tmp/app/target/my-app.war
-        dest: /tmp
+        src: /tmp/my_app/target/my-app.war
+        dest: /tmp/my-app.war
 
 - name: Configure Prod
   hosts: cert_emp_prod
@@ -54,4 +54,3 @@
       copy:
         src: /tmp/my-app.war
         dest: /usr/local/tomcat/webapps/my-app.war
-        remote_src: true
