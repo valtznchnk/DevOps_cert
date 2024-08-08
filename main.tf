@@ -30,7 +30,7 @@ resource "yandex_compute_disk" "boot-disk-2" {
   image_id = "fd8t2tl92i4i96khgg06"
 }
 
-resource "yandex_compute_instance" "vm-1" {
+resource "yandex_compute_instance" "vm1" {
   name = "terraform1"
 
   resources {
@@ -59,7 +59,7 @@ resource "yandex_compute_instance" "vm-1" {
   }
 
 }
-resource "yandex_compute_instance" "vm-2" {
+resource "yandex_compute_instance" "vm2" {
   name = "terraform2"
 
   resources {
@@ -88,25 +88,25 @@ resource "yandex_compute_instance" "vm-2" {
   }
 }
 output "internal_ip_address_vm_1" {
-  value = yandex_compute_instance.vm-1.network_interface.0.ip_address
+  value = yandex_compute_instance.vm1.network_interface.0.ip_address
 }
 
 output "internal_ip_address_vm_2" {
-  value = yandex_compute_instance.vm-2.network_interface.0.ip_address
+  value = yandex_compute_instance.vm2.network_interface.0.ip_address
 }
 
 output "external_ip_address_vm_1" {
-  value = yandex_compute_instance.vm-1.network_interface.0.nat_ip_address
+  value = yandex_compute_instance.vm1.network_interface.0.nat_ip_address
 }
 
 output "external_ip_address_vm_2" {
-  value = yandex_compute_instance.vm-2.network_interface.0.nat_ip_address
+  value = yandex_compute_instance.vm2.network_interface.0.nat_ip_address
 }
 resource "local_file" "ansible_inventory" {
   filename = "${path.module}/hosts"
   content  = <<EOT
             [cert_emp]
-            ${join("\n", yandex_compute_instance.vm[*].network_interface.0.nat_ip_address)}
+            ${join("\n", yandex_compute_instance.vm1.network_interface.0.nat_ip_address)}
   EOT
 
 }
