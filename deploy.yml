@@ -46,6 +46,17 @@
       apt:
         update_cache: yes
 
+    - name: Install apache tomcat
+      become: yes
+      shell: |
+        sudo apt install openjdk-11-jdk -y
+        cd /opt
+        sudo wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.93/bin/apache-tomcat-9.0.93.tar.gz
+        sudo tar xvf apache-tomcat-9.0.93.tar.gz
+        sudo mv apache-tomcat-9.0.93 tomcat
+        sudo chown -R $USER:$USER /opt/tomcat
+        /opt/tomcat/bin/startup.sh
+
     - name: Ensure maven package is present
       apt:
         name: maven
@@ -54,4 +65,6 @@
     - name: Copy my-app.war
       copy:
         src: /tmp/my-app.war
-        dest: /usr/local/tomcat/webapps/
+        dest: /opt/tomcat/webapps/
+      shell: |
+        /opt/tomcat/bin/startup.sh
