@@ -5,6 +5,10 @@
   become: yes
 
   tasks:
+    - name: Apt update
+      apt:
+        update_cache: yes
+
     - name: Ensure maven package is present
       apt:
         name: maven
