@@ -70,4 +70,4 @@
     - name: Start apache tomcat
       become: yes
       shell: |
-        /opt/tomcat/bin/startup.sh
+        sudo /opt/tomcat/bin/startup.sh
