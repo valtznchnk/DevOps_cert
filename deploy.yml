@@ -54,4 +54,4 @@
     - name: Copy my-app.war
       copy:
         src: /tmp/my-app.war
-        dest: /usr/local/tomcat/webapps/my-app.war
+        dest: /usr/local/tomcat/webapps/
