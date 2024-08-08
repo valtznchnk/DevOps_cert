@@ -34,7 +34,8 @@
     - name: Copy war-file in master
       fetch:
         src: /home/ubuntu/my_app/target/my-app.war
-        dest: /tmp/my-app.war
+        dest: /tmp
+        flat: yes
 
 - name: Configure Prod
   hosts: cert_emp_prod
