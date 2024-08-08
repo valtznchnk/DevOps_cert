@@ -48,7 +48,7 @@ resource "yandex_compute_instance" "vm1" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file("/root/.ssh/id_ed25519.pub")}"
+    ssh-keys = "ubuntu:${file("/var/lib/jenkins/.ssh/id_ed25519.pub")}"
     user-data = <<-EOF
       #cloud-config
       users:
@@ -77,7 +77,7 @@ resource "yandex_compute_instance" "vm2" {
   }
 
   metadata = {
-    ssh-keys = "ubuntu:${file("/root/.ssh/id_ed25519.pub")}"
+    ssh-keys = "ubuntu:${file("/var/lib/jenkins/.ssh/id_ed25519.pub")}"
     user-data = <<-EOF
       #cloud-config
       users:

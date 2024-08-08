@@ -4,9 +4,9 @@ pipeline {
     environment {
         YANDEX_CLOUD_FOLDER_ID = credentials('yc-folder-id') // Укажите правильный ID
         YANDEX_CLOUD_SERVICE_ACCOUNT_KEY = credentials('yc-service-account-key') // Ваш сервисный аккаунт
-        TERRAFORM_DIR = './terraform' // Директория с кодом Terraform
-        ANSIBLE_DIR = './ansible' // Директория с кодом Ansible
-        APP_NAME = 'my-java-app' // Название вашего приложения
+        TERRAFORM_DIR = '/home/devops_learning/employment_cert' // Директория с кодом Terraform
+        ANSIBLE_DIR = '/home/devops_learning/employment_cert' // Директория с кодом Ansible
+        APP_NAME = 'my-app' // Название вашего приложения
         IMAGE_ID = 'fd8b8n7t3u5p7e5q3o5h' // ID образа вашего Docker
         INSTANCE_NAME = 'java-app-instance' // Имя инстанса
     }
