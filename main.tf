@@ -87,6 +87,7 @@ resource "yandex_compute_instance" "vm2" {
     EOF
   }
 }
+
 output "internal_ip_address_vm_1" {
   value = yandex_compute_instance.vm1.network_interface.0.ip_address
 }
@@ -102,6 +103,7 @@ output "external_ip_address_vm_1" {
 output "external_ip_address_vm_2" {
   value = yandex_compute_instance.vm2.network_interface.0.nat_ip_address
 }
+
 resource "local_file" "ansible_inventory" {
   filename = "/etc/ansible/hosts"
   content  = <<EOT
@@ -110,5 +112,4 @@ ${yandex_compute_instance.vm1.network_interface.0.nat_ip_address} ansible_user=u
 [cert_emp_prod]
 ${yandex_compute_instance.vm2.network_interface.0.nat_ip_address} ansible_user=ubuntu ansible_ssh_private_key_file=/root/.ssh/id_ed25519 ansible_ssh_host_key_checking=False
 EOT
-
 }
