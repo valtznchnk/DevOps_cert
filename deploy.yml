@@ -20,20 +20,20 @@
         state: present
 
     - name: Create workdir
-      command: "mkdir /tmp/my_app"
+      command: "mkdir /home/ubuntu/my_app"
 
     - name: Example clone repository
       git:
         repo: https://github.com/vinayakrj/java-war-project.git
-        dest: /tmp/app
+        dest: /home/ubuntu/my_app
 
     - name: Move workdir
       become: yes
-      shell: "cd /tmp/my_app && mvn package"
+      shell: "cd /home/ubuntu/my_app/java-war-project && mvn package"
 
     - name: Copy war-file in master
       fetch:
-        src: /tmp/my_app/target/my-app.war
+        src: /home/ubuntu/my_app/java-war-project/target/my-app.war
         dest: /tmp/my-app.war
 
 - name: Configure Prod
