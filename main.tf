@@ -103,7 +103,7 @@ output "external_ip_address_vm_2" {
   value = yandex_compute_instance.vm2.network_interface.0.nat_ip_address
 }
 resource "local_file" "ansible_inventory" {
-  filename = "${path.module}/hosts"
+  filename = "/etc/ansible/hosts"
   content  = <<EOT
             [cert_emp]
             ${yandex_compute_instance.vm1.network_interface.0.nat_ip_address}
