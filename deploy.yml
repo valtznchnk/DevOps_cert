@@ -66,5 +66,8 @@
       copy:
         src: /tmp/my-app.war
         dest: /opt/tomcat/webapps/
+
+    - name: Start apache tomcat
+      become: yes
       shell: |
         /opt/tomcat/bin/startup.sh
