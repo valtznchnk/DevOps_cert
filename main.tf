@@ -106,9 +106,9 @@ resource "local_file" "ansible_inventory" {
   filename = "/etc/ansible/hosts"
   content  = <<EOT
 [cert_emp_deploy]
-${yandex_compute_instance.vm1.network_interface.0.nat_ip_address}
+${yandex_compute_instance.vm1.network_interface.0.nat_ip_address} ansible_user=ubuntu ansible_ssh_private_key_file=/root/.ssh/id_ed25519
 [cert_emp_prod]
-${yandex_compute_instance.vm2.network_interface.0.nat_ip_address}
+${yandex_compute_instance.vm2.network_interface.0.nat_ip_address} ansible_user=ubuntu ansible_ssh_private_key_file=/root/.ssh/id_ed25519
 EOT
 
 }
